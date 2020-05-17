@@ -1,0 +1,30 @@
+{
+  "name": "@types/ioredis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "generate": "ts-node ./generate.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npm run clone-redis-doc && npm run clone-ioredis",
+    "clone-ioredis": "rimraf -rf ./redis-doc && git clone https://github.com/antirez/redis-doc.git",
+    "clone-redis-doc": "rimraf -rf ./ioredis && git clone https://github.com/luin/ioredis.git",
+    "patch-ioredis": "ts-node ./patch-ioredis.ts",
+    "generate-ioredis-bundle": "dts-bundle-generator -o ioredis.d.ts ./ioredis/lib/index.ts --external-types node"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "rimraf": "^3.0.2",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.9.2"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.1",
+    "@types/semver": "^7.2.0",
+    "camelcase": "^6.0.0",
+    "dts-bundle-generator": "^4.3.0",
+    "redis-commands": "^1.5.0",
+    "semver": "^7.3.2"
+  }
+}
